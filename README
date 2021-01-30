@@ -1,0 +1,17 @@
+This python script generates a set of bingo cards in RTF format, from an RTF template file and a phrases file. Since I keep finding this periodically useful, I wanted to publish it in case others can use it.
+
+Usage:
+
+    python3 bingo_cards.py templateFile phrasesFile numCards
+
+To run it with the samples included, as-is, try this:
+
+    python3 bingo_cards.py template.rtf phrases.txt 30
+
+See the example output folder for examples.
+
+Modify template.rtf file to your liking. I recommend using MS Word to edit it.
+
+Modify the phrases.txt file for the phrases you want for the bingo squares.
+
+Please contribute your phrases collections to the repo, as new phrases text files!
