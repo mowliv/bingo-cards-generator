@@ -26,22 +26,30 @@ def remove_random_item(array):
 
 
 def generate_card(template, _phrases, filename_base, card_num):
-    # copy the phrasesarray since we are going to destroy it.
+    # copy the phrases array since we are going to destroy it.
     phrases = _phrases[:]
-    
+
+    # the first phrase is taken as center square
+    center_phrase = phrases[0]
+    del phrases[0]
+
+    # this is the replacement string from the template
     match_string = 'ABINGO'
     
     for i in range(25):
 
         # magic square #12 (the 13th) is the FREE middle square
         if i == 12:
-            square = "\n\nYou're on Mute (FREE!)"
+            phrase = center_phrase
         else:
+            if not phrases:
+                print("Error: ran out of phrases. Must have at least 24 phrases in the phrases file.")
+                sys.exit(1)
             phrase = remove_random_item(phrases)
-            phrase = '\n' + phrase.strip()
+            phrase = '\n' + phrase
         template = replace_string(template, match_string, phrase)
         
-        # bump the match string to next
+        # bump the match string to next (ABINGO, BBINGO, CBINGO, etc)
         match_string = chr(ord(match_string[0])+1) + match_string[1:]
 
     # stick in the card number
@@ -55,13 +63,14 @@ def generate_card(template, _phrases, filename_base, card_num):
 
 def make_cards(template_file, phrases_file, num_cards):
     template = open(template_file).read()
-    # load squares and throw out blank lines
-    phrases = list(filter(lambda x: x, open(phrases_file).readlines()))
+    # load squares and throw out blank lines and comments (start with #)
+    phrases = [item.strip() for item in open(phrases_file).readlines() if item.strip() and item[0] != '#']
     assert num_cards > 0
     
     for i in range(num_cards):
         generate_card(template, phrases, 'card ', i + 1)
 
+    print(f"Generated {num_cards} cards as .RTF files")
 
 if __name__ == "__main__":
     if len(sys.argv) < 4:
