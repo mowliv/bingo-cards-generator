@@ -1,4 +1,4 @@
-This python script generates a set of bingo cards in RTF format, from an RTF template file and a phrases file. Since I keep finding this periodically useful, I wanted to publish it in case others can use it.
+This python script generates a set of bingo cards in RTF format, from an RTF template file and a phrases file. (RTF is the Rich Text file format that can be edited in Microsoft Word or other editors.) Since I keep finding this periodically useful, I wanted to publish it in case others can use it.
 
 Usage:
 
